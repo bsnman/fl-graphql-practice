@@ -1,5 +1,9 @@
 # Festran
 
+Using graphql for API
+Using monggoDB for database
+
+
 install node modules using
 ```
 npm install
@@ -7,5 +11,5 @@ npm install
 
 run graphql server
 ```
-node src/server.js
+npm run server
 ```
