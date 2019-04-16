@@ -1,35 +1,43 @@
-import express from "express";
-import expressGraphQL from "express-graphql";
+require("dotenv").config();
+import { GraphQLServer, PubSub } from "graphql-yoga";
 import mongoose from "mongoose";
-import bodyParser from "body-parser";
-import cors from "cors";
 
-import schema from ".././graphql";
+import schema from "../graphql/";
+import { models } from "./config/db/";
 
-const app = express();
-const PORT = process.env.PORT || 4000;
-const db = "mongodb+srv://bsnman:fGNf6pzgqMgVonJ9@pri-festran-8opv9.mongodb.net/festran?retryWrites=true"
+const { mongoURI: db } = process.env;
+
+const pubsub = new PubSub();
+
+const options = {
+  port: process.env.PORT || "4000",
+  endpoint: "/api",
+  subscriptions: "/subscriptions",
+  playground: "/playground"
+};
+
+const context = {
+  models,
+  pubsub
+};
 
 // Connect to MongoDB with Mongoose.
 mongoose
   .connect(
     db,
     {
-        useCreateIndex: true,
-        useNewUrlParser: true
-    }   
+      useCreateIndex: true,
+      useNewUrlParser: true
+    }
   )
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
-  app.use(
-        "/api",
-        cors(),
-        bodyParser.json(),
-        expressGraphQL({
-            schema,
-            graphiql: true
-        })
-  );
-  
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const server = new GraphQLServer({
+  schema,
+  context
+});
+
+server.start(options, ({ port }) => {
+  console.log(`🚀 Server is running on http://localhost:${port}`);
+});

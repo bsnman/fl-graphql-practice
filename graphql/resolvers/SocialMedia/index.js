@@ -1,5 +1,5 @@
 // The User schema.
-import SocialMedia from "../../../models/SocialMedia";
+import SocialMedia from "../../../server/models/SocialMedia";
 
 export default {
   Query: {

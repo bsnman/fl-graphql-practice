@@ -1,6 +1,9 @@
 export default `
+  input UserInput {
+    id: ID
+  }
   type SocialMedia {
-    id: String!
+    id: ID
     user: User!
     type: String!
     link: String!
@@ -10,7 +13,7 @@ export default `
     socialMedias: [SocialMedia]
   }
   type Mutation {
-    addSocialMedia(id: String!, type: String!, link: String!): SocialMedia
+    addSocialMedia(id: String!, user: UserInput!, type: String!, link: String!): SocialMedia
     editSocialMedia(id: String!, type: String!, link: String!): SocialMedia
     deleteSocialMedia(id: String!, type: String!, link: String!): SocialMedia
   }
