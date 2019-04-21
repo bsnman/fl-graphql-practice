@@ -1,9 +1,14 @@
-export default `
+
+import gql from 'graphql-tag'
+
+export default gql`
   type Post {
     _id: ID!
     title: String!
     body: String!
     published: Boolean!
+    created_at: String
+    updated_at: String
     author: User!
     comments: [Comment!]!
   }

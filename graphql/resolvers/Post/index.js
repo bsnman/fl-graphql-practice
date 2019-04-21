@@ -9,9 +9,10 @@ export default {
     post: async (parent, { _id }, context, info) => {
       return await Post.findOne({ _id }).exec();
     },
-    posts: async (parent, args, context, info) => {
+    posts: async (parent, argsrs, context, info) => {
       const res = await Post.find({})
         .populate()
+        .sort("-updated_at")
         .exec();
 
       return res.map(u => ({
@@ -19,6 +20,8 @@ export default {
         title: u.title,
         body: u.body,
         published: u.published,
+        created_at: u.created_at,
+        updated_at: u.updated_at,
         author: u.author,
         comments: u.comments
       }));

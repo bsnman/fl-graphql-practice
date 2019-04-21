@@ -1,19 +1,13 @@
 {
-  "name": "graphql-mongodb-server",
+  "name": "festran",
   "version": "1.0.0",
-  "description": "A GraphQL MongoDB server.",
+  "description": "GraphQL server",
   "main": "index.js",
   "scripts": {
     "start": "npm run server",
     "server": "nodemon --exec babel-node server/index.js"
   },
-  "keywords": [
-    "graphql",
-    "mongodb",
-    "boilerplate",
-    "server"
-  ],
-  "author": "Leonardo Maldonado <leonardomso11@gmail.com>",
+  "author": "Radih Paraguas Jr <radihjrprgs@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -49,6 +43,7 @@
     "dotenv": "^6.1.0",
     "graphql": "^14.0.2",
     "graphql-subscriptions": "^1.0.0",
+    "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.3",
     "graphql-yoga": "^1.16.7",
     "merge-graphql-schemas": "^1.5.7",

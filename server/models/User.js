@@ -8,17 +8,28 @@ ObjectID.prototype.valueOf = function() {
 };
 
 const UserSchema = new Schema({
-  name: {
+  first_name: {
     type: String,
     required: true
+  },
+  last_name: {
+    type: String,
+    required: true
+  },
+  display_name: {
+    type: String
   },
   email: {
     type: String,
     unique: true,
     required: true
   },
-  age: {
-    type: Number,
+  password: {
+    type: String,
+    required: true
+  },
+  birthdate: {
+    type: mongoose.Schema.Types.Date,
     required: true
   },
   posts: [

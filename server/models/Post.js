@@ -7,7 +7,7 @@ ObjectID.prototype.valueOf = function() {
   return this.toString();
 };
 
-const PostSchema = new Schema({
+const definition = {
   title: {
     type: String,
     required: true
@@ -30,6 +30,15 @@ const PostSchema = new Schema({
       ref: "Comment"
     }
   ]
-});
+}
+
+const options = {
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at"
+  }
+}
+
+const PostSchema = new Schema(definition, options);
 
 export default mongoose.model("Post", PostSchema);
