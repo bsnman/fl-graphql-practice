@@ -1,24 +1,23 @@
 require("dotenv").config();
-import { GraphQLServer, PubSub } from "graphql-yoga";
 import mongoose from "mongoose";
+import passport from 'passport'
+import bodyParser from 'body-parser';[]
+import uuid from 'node-uuid'
 
-import schema from "../graphql/";
-import { models } from "./config/db/";
+import server from './graphqlserver/server.js'
+
+import './passport.js'
+import './routes/auth.js'
+
+const { PORT, EXPRESS_SESSION_SECRET } = process.env
 
 const { mongoURI: db } = process.env;
 
-const pubsub = new PubSub();
-
 const options = {
-  port: process.env.PORT || "4000",
+  port: PORT || "4000",
   endpoint: "/api",
   subscriptions: "/subscriptions",
   playground: "/playground"
-};
-
-const context = {
-  models,
-  pubsub
 };
 
 // Connect to MongoDB with Mongoose.
@@ -33,10 +32,7 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
-const server = new GraphQLServer({
-  schema,
-  context
-});
+
 
 server.start(options, ({ port }) => {
   console.log(`🚀 Server is running on http://localhost:${port}`);
